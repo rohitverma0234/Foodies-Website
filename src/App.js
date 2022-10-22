@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter,Routes, Route} from "react-router-dom";
+import Home from './Home';
+import {ThemeProvider} from "styled-components"
+import { GlobalStyle } from './GlobalStyle';
+import Header from './components/Header/Header';
+import Footer from './components/Footer';
+import Learn from './components/learn/Learn';
+import Products from './components/products/Products';
+import Banner2 from './components/Banner/Banner2';
 
-function App() {
+
+const App = () => {
+
+  const theme = {
+    colors:{
+      color:"red",
+    }
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={theme}>
+    <BrowserRouter>
+    <GlobalStyle />
+    <Header/>
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/about" element={<Learn/>} />
+      <Route path="/top" element={<Products/>} />
+      <Route path="/find" element={<Banner2/>} />
+    </Routes>
+    <Footer/>
+    </BrowserRouter>
+    </ThemeProvider>
+  )
 }
 
 export default App;
